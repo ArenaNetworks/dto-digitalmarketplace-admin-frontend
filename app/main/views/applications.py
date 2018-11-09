@@ -97,7 +97,7 @@ def preview_application(id=None):
 @login_required
 @role_required('admin')
 def preview_application_casestudy(application_id, case_study_id):
-    application = data_api_client.get_application(application_id)
+    application = data_api_client.req.applications(application_id).admin().get()
     for id in application.get('application', {}).get('case_studies', {}):
         if type(id) is dict:
             case_study = id
@@ -106,8 +106,14 @@ def preview_application_casestudy(application_id, case_study_id):
             case_study = application['application']['case_studies'][id]
 
         if str(id) == case_study_id:
-            rendered_component = render_component('bundles/CaseStudy/CaseStudyViewWidget.js',
-                                                  {"casestudy": case_study})
+            case_study['admin'] = True
+            case_study['domain'] = application['domains']['list'][case_study['service']]
+
+            rendered_component = render_component(
+                'bundles/CaseStudy/CaseStudyViewWidget.js', {
+                    "casestudy": case_study
+                }
+            )
 
             return render_template(
                 '_react.html',
