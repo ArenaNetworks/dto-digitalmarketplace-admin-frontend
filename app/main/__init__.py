@@ -6,6 +6,7 @@ main = Blueprint('main', __name__)
 from .views import (  # noqa
     login,
     agreements,
+    case_study,
     communications,
     service_updates,
     services,
