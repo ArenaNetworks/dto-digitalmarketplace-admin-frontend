@@ -34,8 +34,9 @@ def case_study_assessment_list():
         'bundles/CaseStudy/CaseStudyAssessmentsListWidget.js', {
             'casestudies': case_studies,
             'meta': {
-                # 'url_case_study_assessment_update': url_for('.add_case_study_assessment', case_study_id=case_study_id),
-                # 'url_case_study_view': url_for('.case_study_view', case_study_id=0)
+                'url_case_study_status_update': {
+                    cs['id']: url_for('.update_case_study_status', case_study_id=cs['id']) for cs in case_studies
+                }
             }
         }
     )
@@ -77,15 +78,37 @@ def add_case_study_assessment(case_study_id):
     json_payload = request.get_json(force=True)
     result = (
         data_api_client
-            .req
-            .admin()
-            .casestudy(case_study_id)
-            .assessment()
-            .post({
+        .req
+        .admin()
+        .casestudy(case_study_id)
+        .assessment()
+        .post({
             'update_details': {
                 'updated_by': current_user.email_address
             },
             "assessment": json_payload
+        })
+    )
+
+    return jsonify(result)
+
+
+@main.route('/casestudy-assessment/<int:case_study_id>', methods=['PUT'])
+@login_required
+@role_required('admin')
+def update_case_study_status(case_study_id):
+    json_payload = request.get_json(force=True)
+    result = (
+        data_api_client
+        .req
+        .admin()
+        .casestudy(case_study_id)
+        .status()
+        .put({
+            'update_details': {
+                'updated_by': current_user.email_address
+            },
+            "data": json_payload
         })
     )
 
