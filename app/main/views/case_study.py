@@ -46,6 +46,7 @@ def case_study_assessment_list():
         component=rendered_component
     )
 
+
 @main.route('/casestudy-assessment/<int:case_study_id>', methods=['GET'])
 @login_required
 @role_required('admin')
@@ -70,6 +71,7 @@ def case_study_view(case_study_id):
         '_react.html',
         component=rendered_component
     )
+
 
 @main.route('/casestudy-assessment/<int:case_study_id>', methods=['POST'])
 @login_required
