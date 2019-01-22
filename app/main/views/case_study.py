@@ -35,8 +35,9 @@ def case_study_assessment_list():
             'casestudies': case_studies,
             'meta': {
                 'url_case_study_status_update': {
-                    cs['id']: url_for('.update_case_study_status', case_study_id=cs['id']) for cs in case_studies
-                }
+                    cs['id']: url_for('.update_case_study_status', case_study_id=cs['id']) for cs in result
+                },
+                'url_assessment_search': url_for('.case_study_assessment_search')
             }
         }
     )
@@ -45,6 +46,19 @@ def case_study_assessment_list():
         '_react.html',
         component=rendered_component
     )
+
+
+@main.route('/casestudy-assessment-search', methods=['GET'])
+@login_required
+@role_required('admin')
+def case_study_assessment_search():
+    search = request.args.get('search', None)
+    response = data_api_client.req.admin().casestudy().assessment().get({
+        'search':search
+    })
+    case_studies = response.get('case_studies')
+    
+    return jsonify(case_studies)
 
 
 @main.route('/casestudy-assessment/<int:case_study_id>', methods=['GET'])
