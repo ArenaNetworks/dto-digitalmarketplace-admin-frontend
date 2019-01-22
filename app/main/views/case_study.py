@@ -35,7 +35,7 @@ def case_study_assessment_list():
             'casestudies': case_studies,
             'meta': {
                 'url_case_study_status_update': {
-                    cs['id']: url_for('.update_case_study_status', case_study_id=cs['id']) for cs in result
+                    cs['id']: url_for('.update_case_study_status', case_study_id=cs['id']) for cs in case_studies
                 },
                 'url_assessment_search': url_for('.case_study_assessment_search')
             }
