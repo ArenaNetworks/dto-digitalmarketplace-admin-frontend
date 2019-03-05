@@ -115,7 +115,7 @@ def update_brief(brief_id):
                        'update_details': {'updated_by': current_user.email_address}}).get('briefs')
         elif request.form.get('add_seller_to_rfx_brief'):
             brief = (data_api_client.req.briefs(brief_id).suppliers(request.form['add_seller_to_rfx_brief'].strip())
-                        .put({'update_details': {'updated_by': current_user.email_address}}).get('briefs'))
+                    .put({'update_details': {'updated_by': current_user.email_address}}).get('briefs'))
         elif request.form.get('remove_seller_from_rfx_brief'):
             brief = (data_api_client.req.briefs(brief_id).suppliers(
                     request.form['remove_seller_from_rfx_brief'].strip())
