@@ -114,16 +114,34 @@ def update_brief(brief_id):
                                   },
                        'update_details': {'updated_by': current_user.email_address}}).get('briefs')
         elif request.form.get('add_seller_to_rfx_brief'):
-            brief = (data_api_client.req.briefs(brief_id)
-                                        .suppliers(request.form['add_seller_to_rfx_brief'].strip())
-                                        .put({'update_details': {
-                                              'updated_by': current_user.email_address}}).get('briefs'))
+            brief = (
+                data_api_client
+                .req
+                .briefs(brief_id)
+                .suppliers(
+                    request.form['add_seller_to_rfx_brief'].strip()
+                )
+                .put({
+                    'update_details': {
+                        'updated_by': current_user.email_address
+                    }
+                })
+                .get('briefs')
+            )
         elif request.form.get('remove_seller_from_rfx_brief'):
-            brief = (data_api_client.req.briefs(brief_id).suppliers(
-                    request.form['remove_seller_from_rfx_brief'].strip())
-                    .delete({
-                        'update_details': {'updated_by': current_user.email_address}
-                    }).get('briefs'))
+            brief = (
+                data_api_client
+                .req
+                .briefs(brief_id)
+                .suppliers(
+                    request.form['remove_seller_from_rfx_brief'].strip()
+                )
+                .delete({
+                    'update_details': {
+                        'updated_by': current_user.email_address
+                    }
+                })
+                .get('briefs'))
         elif 'edit_seller_email_list' in request.form:
             edit_seller_email_list = request.form.get('edit_seller_email_list', []).split(NEW_LINE)
             brief = data_api_client.req.briefs(brief_id).admin() \
@@ -147,20 +165,20 @@ def update_brief(brief_id):
                 .post({'briefs': {'areaOfExpertise': request.form['edit_area_of_expertise']
                                   },
                        'update_details': {'updated_by': current_user.email_address}}).get('briefs')
+        else:
+            brief = data_api_client.get_brief(brief_id).get('briefs')
 
     except HTTPError, e:
         flash(e.message, 'error')
         brief = data_api_client.get_brief(brief_id).get('briefs')
         users = brief.get('users')
-        sellers = brief.get('sellers')
         title = brief.get('title')
         return render_template_with_csrf(
             "view_buyers.html",
             users=users,
             title=title,
             brief_id=brief_id,
-            brief=brief,
-            sellers=sellers
+            brief=brief
         )
 
     flash('brief_updated', 'info')

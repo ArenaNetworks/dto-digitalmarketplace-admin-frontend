@@ -50,7 +50,8 @@
   {% with heading = brief_id|string + ' - ' + title if title %}
     {% include "toolkit/page-heading.html" %}
   {% endwith %}
-  
+
+{% if brief%}
 <div>
 <hr>
 <h3>Users</h3>
@@ -84,9 +85,6 @@
   {% endcall %}
 
   <br>
-{% if brief%}
-
-{# Add user to the brief #}
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
         {{ form.csrf_token }}
         <label class="question-heading" for="add_user">Add user to brief (email address or id)</label>
@@ -94,7 +92,6 @@
         <br/>
         <input type="submit" value="Save" class="button-save">
     </form>
-{# Remove user from the brief #}
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
         {{ form.csrf_token }}
         <label class="question-heading" for="remove_user">Remove user from brief (email address or id)</label>
@@ -131,7 +128,6 @@
             {% endcall %}
         {% endcall %}
     {% endif %}
-{# Add Sellers to the RFx brief #}
     {%if brief.lotSlug == 'rfx' %}
         <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
             {{ form.csrf_token }}
@@ -141,7 +137,6 @@
         <input type="submit" value="Save" class="button-save">
         </form>
     {% endif %}
-{# Remove Sellers from the RFx brief #}
     {% if brief.lotSlug == 'rfx' %}
         <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
             {{ form.csrf_token }}
@@ -152,7 +147,6 @@
             <hr>
         </form>
     {% endif %}
-{# Edit the list of sellers for non-RFx briefs #}
     {% if brief.lotSlug != 'rfx' %}
         <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
             {{ form.csrf_token }}
@@ -161,7 +155,6 @@
             <input type="submit" value="Save" class="button-save">
         </form>
     {% endif %}
-{# Edit the seller email for individual sellers for non-RFx briefs #}
     {% if brief.lotSlug != 'rfx' %}
         <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
             {{ form.csrf_token }}
@@ -173,8 +166,6 @@
     {% endif %}
     </div>
     <h3> Edit brief data</h3>
-
-{# Select and save the area of expertise for this brief #}
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
         {{ form.csrf_token }}
         <label class="question-heading" for="edit_area_of_expertise">Select area of expertise</label>
@@ -187,7 +178,6 @@
         <br/>
         <input type="submit" value="Save" class="button-save">
     </form>
-{# Set new date for questions to be asked by/closing date #}
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
         {{ form.csrf_token }}
         <label class="question-heading" for="questions_closed_at">Set new question date (YYYY-MM-DD)</label>
@@ -199,19 +189,16 @@
         <input type="submit" value="Save" class="button-save">
     </form>
     <br/>
-{# Set new date for questions to be asked by #}
     <form method="get" action="{{ url_for( '.brief_edit_json', brief_id=brief_id) }}">
       <button id="edit-json-button">JSON Editor</button>
     </form>
     <br />
-{# Send seller requested feedback email #}
     <form method="post" action="{{ url_for( '.seller_feedback_email', brief_id=brief_id) }}">
       {{ form.csrf_token }}
       <button id="seller-request-feedback-email">Send seller requested feedback email to buyer</button>
     </form>
     <br />
 {% endif %}
-{# Find the buyer by searching through the opportunity ID #}
   <form action="{{ url_for('.find_buyer_by_brief_id') }}" method="get" class="question">
       <label class="question-heading" for="brief_id">Find buyer by opportunity ID</label>
       <p class='hint'>
@@ -221,7 +208,6 @@
       <br/>
       <input type="submit" value="Search" class="button-save">
   </form>
-  
   <br />
   {% if brief.status == 'live' %}
     <dialog id="withdraw-dialog">
