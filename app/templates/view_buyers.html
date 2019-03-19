@@ -136,8 +136,6 @@
             <br>
         <input type="submit" value="Save" class="button-save">
         </form>
-    {% endif %}
-    {% if brief.lotSlug == 'rfx' %}
         <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
             {{ form.csrf_token }}
             <label class="question-heading" for="remove_seller_from_rfx_brief">Remove a seller from this RFx brief (seller code)</label>
@@ -154,8 +152,6 @@
             <textarea rows="5" name="edit_seller_email_list" id="edit_seller_email_list" class="text-area">{{"\n".join (brief.sellerEmailList)}}</textarea>
             <input type="submit" value="Save" class="button-save">
         </form>
-    {% endif %}
-    {% if brief.lotSlug != 'rfx' %}
         <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
             {{ form.csrf_token }}
             <label class="question-heading" for="edit_seller_email">Edit seller email (Individual seller)</label>
