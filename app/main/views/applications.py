@@ -83,6 +83,7 @@ def preview_application(id=None):
         'submit_url': url_for('.preview_application', id=id),
 
     }
+    props['application']['showRejectedCaseStudies'] = True
 
     rendered_component = render_component('bundles/SellerRegistration/ApplicationPreviewWidget.js', props)
 

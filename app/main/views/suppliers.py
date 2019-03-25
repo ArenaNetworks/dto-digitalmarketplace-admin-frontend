@@ -553,6 +553,8 @@ def full_supplier_view(supplier_code):
         current_app.config['DM_HTTP_PROTO'],
         current_app.config['DM_MAIN_SERVER_NAME']
     )
+    props['application']['showRejectedCaseStudies'] = True
+
     rendered_component = render_component('bundles/SellerRegistration/ApplicationPreviewWidget.js', props)
 
     return render_template(
