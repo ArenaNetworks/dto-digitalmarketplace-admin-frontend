@@ -27,7 +27,8 @@
         "Name",
         summary.hidden_field_heading("Change name"),
         summary.hidden_field_heading("Users"),
-        summary.hidden_field_heading("Services")
+        summary.hidden_field_heading("Services"),
+        summary.hidden_field_heading("Case Studies")
       ] %}
     {% elif current_user.has_role("admin-ccs-sourcing") %}
       {% set field_headings = [
@@ -41,6 +42,7 @@
         "Name",
         summary.hidden_field_heading("Users"),
         summary.hidden_field_heading("Services"),
+        summary.hidden_field_heading("Case Studies"),
       ] %}
     {% endif %}
 
@@ -80,6 +82,7 @@
         {% if current_user.has_any_role('admin', 'admin-ccs-category') %}
           {{ summary.edit_link("Users", url_for(".find_supplier_users", supplier_code=item.code)) }}
           {{ summary.edit_link("Services", url_for(".find_supplier_services", supplier_code=item.code)) }}
+          {{ summary.edit_link("Case Studies", url_for(".case_study_assessment_list", supplier_code=item.code)) }}
         {% endif %}
       {% endcall %}
     {% endcall %}

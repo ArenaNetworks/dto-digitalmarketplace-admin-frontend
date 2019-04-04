@@ -29,11 +29,13 @@ from itertools import chain
 def case_study_assessment_list():
     response = data_api_client.req.admin().casestudy().assessment().get()
     case_studies = response.get('case_studies')
+    searched_supplier_code = request.args.get('supplier_code')
 
     rendered_component = render_component(
         'bundles/CaseStudy/CaseStudyAssessmentsListWidget.js', {
             'casestudies': case_studies,
             'meta': {
+                'searched_supplier_code': searched_supplier_code,
                 'url_case_study_status_update': {
                     cs['id']: url_for('.update_case_study_status', case_study_id=cs['id']) for cs in case_studies
                 },
@@ -71,11 +73,20 @@ def case_study_view(case_study_id, case_study_assessment_id=None):
     case_study = response.get('case_study')
     domain = response.get('domain')
     case_study['domain'] = domain
+    userList = data_api_client.req.casestudy().users('admin').get()['user_list']
+    adminUserNameIdList = {}
+
+    for i in range(len(userList)):
+            adminUserNameIdList.update({
+                userList[i]["id"]: userList[i]['name']
+                }
+            )
 
     rendered_component = render_component(
         'bundles/CaseStudy/CaseStudyViewWidget.js', {
             'casestudy': case_study,
             'meta': {
+                'adminUserNameIdList': adminUserNameIdList,
                 'url_case_study_assessment_add': url_for('.add_case_study_assessment', case_study_id=case_study_id),
                 'url_case_study_assessment_update': url_for(
                     '.update_case_study_assessment',
