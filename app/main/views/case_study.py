@@ -73,6 +73,12 @@ def case_study_view(case_study_id, case_study_assessment_id=None):
     case_study = response.get('case_study')
     domain = response.get('domain')
     case_study['domain'] = domain
+
+    response = data_api_client.req.admin().casestudy().assessment().get({
+        'case_study_id': case_study_id
+    })
+    case_studies = response.get('case_studies')
+
     userList = data_api_client.req.casestudy().users('admin').get()['user_list']
     adminUserNameIdList = {}
 
@@ -82,12 +88,29 @@ def case_study_view(case_study_id, case_study_assessment_id=None):
                 }
             )
 
+    assessment_results = case_studies[0].get('assessment_results', [])
+    delete_cs_assessment_url = None
+    try:
+        delete_cs_assessment_url = [{
+            'url_case_study_assessment_delete': url_for(
+                '.delete_case_study_assessment',
+                case_study_id=case_study_id,
+                case_study_assessment_id=ar.get('id')),
+            'assessment_id': ar.get('id')
+        }
+            for ar in assessment_results]
+
+    except:
+        print ("No assessments available.")
+
     rendered_component = render_component(
         'bundles/CaseStudy/CaseStudyViewWidget.js', {
             'casestudy': case_study,
             'meta': {
                 'adminUserNameIdList': adminUserNameIdList,
+                'casestudies': case_studies,
                 'url_case_study_assessment_add': url_for('.add_case_study_assessment', case_study_id=case_study_id),
+                'urls_case_study_assessment_delete': delete_cs_assessment_url,
                 'url_case_study_assessment_update': url_for(
                     '.update_case_study_assessment',
                     case_study_id=case_study_id,
@@ -120,6 +143,28 @@ def add_case_study_assessment(case_study_id):
                 'updated_by': current_user.email_address
             },
             "assessor_user_id": json_payload.get('assessor_user_id')
+        })
+    )
+
+    return jsonify(result)
+
+
+@main.route('/casestudy/<int:case_study_id>/assessment/<int:case_study_assessment_id>', methods=['DELETE'])
+@login_required
+@role_required('admin' or 'manager')
+def delete_case_study_assessment(case_study_id, case_study_assessment_id):
+    json_payload = request.get_json(force=True)
+    result = (
+        data_api_client
+        .req
+        .admin()
+        .casestudy(case_study_id)
+        .assessment(case_study_assessment_id)
+        .delete({
+            'update_details': {
+                'updated_by': current_user.email_address
+            },
+            "assessment": json_payload
         })
     )
 
