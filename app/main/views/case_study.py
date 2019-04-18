@@ -100,8 +100,8 @@ def case_study_view(case_study_id, case_study_assessment_id=None):
         }
             for ar in assessment_results]
 
-    except:
-        print ("No assessments available.")
+    except Exception:
+        pass
 
     rendered_component = render_component(
         'bundles/CaseStudy/CaseStudyViewWidget.js', {
