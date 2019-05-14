@@ -401,6 +401,8 @@ def find_supplier_services():
         domains = supplier['supplier']['domains']
 
     assessed = [sd for sd in domains.get('all', []) if sd['status'] == 'assessed']
+    unassessed = [sd for sd in domains.get('all', []) if sd['status'] == 'unassessed']
+    rejected = [sd for sd in domains.get('all', []) if sd['status'] == 'rejected']
     for a in assessed:
         pricing = supplier['supplier'].get('pricing', None)
         if pricing:
@@ -410,11 +412,31 @@ def find_supplier_services():
         else:
             a['price'] = 'Not specified'
 
+    for u in unassessed:
+        pricing = supplier['supplier'].get('pricing', None)
+        if pricing:
+            price = pricing.get(u['domain_name'], None)
+            if price:
+                u['price'] = price['maxPrice']
+        else:
+            u['price'] = 'Not specified'
+
+    for r in rejected:
+        pricing = supplier['supplier'].get('pricing', None)
+        if pricing:
+            price = pricing.get(r['domain_name'], None)
+            if price:
+                r['price'] = price['maxPrice']
+        else:
+            r['price'] = 'Not specified'
+
     return render_template_with_csrf(
         "view_supplier_services.html",
         services=services["services"],
         supplier=supplier['supplier'],
-        assessed=assessed
+        assessed=assessed,
+        unassessed=unassessed,
+        rejected=rejected
     )
 
 
