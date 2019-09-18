@@ -54,8 +54,10 @@
 {% if brief %}
 <div>
 <hr>
-
+<h3>Brief Details</h3>
 Organisation: {{brief.organisation}}
+<br>
+ContactNumber: {{brief.contactNumber}}
 <hr>
 <h3>Users</h3>
   {% call(item) summary.list_table(
