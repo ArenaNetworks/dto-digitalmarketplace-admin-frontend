@@ -48,7 +48,6 @@ def brief_edit_json(brief_id):
     )
 
 
-
 @main.route('/buyers/<int:brief_id>/update', methods=['POST'])
 @login_required
 @role_required('admin')
@@ -101,7 +100,6 @@ def find_buyer_by_brief_id():
 @role_required('admin')
 def update_brief(brief_id):
     try:
-        #organisation = data_api_client.get_agency_name(brief_id)
         if request.form.get('add_user'):
             brief = data_api_client.req.briefs(brief_id).users(request.form['add_user'].strip()) \
                 .put({'update_details': {'updated_by': current_user.email_address}}).get('briefs')

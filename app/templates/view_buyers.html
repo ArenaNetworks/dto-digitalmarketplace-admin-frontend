@@ -90,13 +90,6 @@ ContactNumber: {{brief.contactNumber}}
   {% endcall %}
 
   <br>
-   
-  <!-- <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
-    {{ form.csrf_token }}
-    <label class="question-heading" for="add_organisation">Agency/Organisation</label>
-    <input type="text" name="add_organisation" id="add_organisation" class="text">
-    <br/>
-  </form> -->
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
         {{ form.csrf_token }}
         <label class="question-heading" for="add_user">Add user to brief (email address or id)</label>
