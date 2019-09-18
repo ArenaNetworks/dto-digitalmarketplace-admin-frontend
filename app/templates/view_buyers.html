@@ -53,13 +53,13 @@
 
 {% if brief %}
 <div>
-<hr>
-<h3>Brief Details</h3>
-Organisation: {{brief.organisation}}
-<br>
-ContactNumber: {{brief.contactNumber}}
-<hr>
-<h3>Users</h3>
+  <hr/>
+  <h3>Brief Details</h3>
+  Organisation: {{brief.organisation}}
+  <br/>
+  Contact Number: {{brief.contactNumber}}
+  <hr/>
+  <h3>Users</h3>
   {% call(item) summary.list_table(
           users,
           caption="Buyers",
@@ -83,7 +83,6 @@ ContactNumber: {{brief.contactNumber}}
         {% call summary.field() %}
           {{ item.phoneNumber }}
         {% endcall %}
-        
 
       {% endcall %}
 
