@@ -67,6 +67,16 @@
                   <input type="submit" value="Search" class="button-save">
               </form>
 
+              <form action="{{ url_for('.find_suppliers') }}" method="get" class="question">
+                <label class="question-heading" for="supplier_name_prefix">Find Teams by Team ID</label>
+                <p class="hint">
+                  eg use the url and find the team id 
+                </p>
+                <input type="text" name="supplier_name_prefix" id="supplier_name_prefix" class="text-box">
+                <input type="submit" value="Search" class="button-save">
+              </form>
+
+
               {% endif %}
           </div>
       </div>
