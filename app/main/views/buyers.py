@@ -94,6 +94,38 @@ def find_buyer_by_brief_id():
         area_of_expertise_selected=brief.get('areaOfExpertise', '')
     )
 
+@main.route('/buyers', methods=['GET'])
+@login_required
+@role_required('admin')
+def find_team_by_brief_id():
+    brief_id = request.args.get('brief_id')
+
+    try:
+        brief = data_api_client.get_brief(brief_id).get('briefs')
+    except:  # noqa
+        flash('no_brief', 'error')
+        return render_template(
+            "view_buyers.html",
+            users=list(),
+            brief_id=brief_id,
+            brief=None
+        ), 404
+
+    users = brief.get('users')
+    title = brief.get('title')
+    return render_template_with_csrf(
+        "view_buyers.html",
+        users=users,
+        title=title,
+        brief_id=brief_id,
+        brief=brief,
+        seller_email_list=convert_array_to_string(brief.get('sellerEmailList', [])),
+        seller_email=brief.get('sellerEmail', ''),
+        area_of_expertise_list=AREA_OF_EXPERTISE_LIST,
+        area_of_expertise_selected=brief.get('areaOfExpertise', '')
+    )
+
+
 
 @main.route('/brief/<int:brief_id>', methods=['POST'])
 @login_required
