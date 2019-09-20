@@ -39,6 +39,8 @@
               message = displayed_message,
               type = "destructive" if category == 'error' else "success"
           %}
+
+          
 <div class={{ "callout--warning" if category == 'error' else "callout" }}>
           {% include "toolkit/notification-banner.html" %}
 </div>
@@ -57,7 +59,7 @@
   <h3>Brief Details</h3>
   Organisation: {{brief.organisation}}
   <br/>
-  Contact Number: {{brief.contactNumber}}
+  ContactNumber: {{brief.contactNumber}}
   <hr/>
   <h3>Users</h3>
   {% call(item) summary.list_table(
@@ -208,6 +210,16 @@
       <input type="submit" value="Search" class="button-save">
   </form>
   <br />
+  <!-- <form action="{{ url_for('.find_team_by_team_id') }}" method="get" class="question">
+    <label class="question-heading" for="team_id">Find Team by Team ID</label>
+    <p class='hint'>
+      You xan dssdasjdkasjhdkjashdkjashdk’ URL.
+    </p>
+    <input type="text" name="brief_id" id="brief_id" class="text-box">
+    <br/>
+    <input type="submit" value="Search" class="button-save">
+</form>
+<br /> -->
   {% if brief.status == 'live' %}
     <dialog id="withdraw-dialog">
         <form action="{{ url_for('.withdraw_brief', brief_id=brief_id) }}" method="post">
