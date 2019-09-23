@@ -8,7 +8,7 @@ from ... import data_api_client
 from ..auth import role_required
 from dmapiclient.errors import HTTPError
 
-@main.route('/buyers', methods=['GET'])
+@main.route('/teams', methods=['GET'])
 @login_required
 @role_required('admin')
 def find_team_by_team_id():
