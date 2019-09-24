@@ -20,9 +20,41 @@
 {% endblock %}
 
 {% block main_content %}
-
   <div>
-    {{team_id}}
+    <h3>Team Details</h3>
+    Team ID: {{team_id}}
+    <br/>
+    Team Leads: {{team_leads}}
   </div>
 
+<div> 
+  <h3> Team Member's Permissions</h3>
+  <br/> 
+  {% call(item) summary.list_table(
+    team,
+    field_headings=[
+        'Name',
+        'Email',
+        'Phone number'
+    ],
+    field_headings_visible=True)
+%}
+
+{% call summary.row() %}
+
+  {{ summary.field_name(item.name) }}
+
+  {% call summary.field() %}
+    {{ item.emailAddress }}
+  {% endcall %}
+
+  {% call summary.field() %}
+    {{ item.phoneNumber }}
+  {% endcall %}
+
+{% endcall %}
+{% endcall %}
+
+
 {% endblock %}
+</div>
