@@ -3,7 +3,7 @@
 {% extends "_base_page.html" %}
 
 {% block page_title %}
-    Buyers – Digital Marketplace admin Teams Test
+    Buyers – Digital Marketplace admin
 {% endblock %}
 
 {% block breadcrumb %}
@@ -13,81 +13,16 @@
               "link": url_for('.index'),
               "label": "Admin home"
           },
-      ] 
+      ]
   %}
     {% include "_breadcrumb.html" %}
   {% endwith %}
 {% endblock %}
 
 {% block main_content %}
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-      {% for category, message in messages %}
-          {% if message == 'no_team' %}
-              {% set displayed_message = "There are no Teams with that ID {}".format(team_id) %}
-          {% elif message == 'Team_updated' %}
-              {% set displayed_message = "Team updated ID {}".format(team_id) %}
-          {% elif message == 'Team_withdrawn' %}
-              {% set displayed_message = "Team {} has been withdrawn".format(team_id) %}
-          {% elif message == 'seller_feedback_email' %}
-              {% set displayed_message = "Seller feedback email sent to buyer" %}
-          {% else %}
-              {% set displayed_message = message %}
-          {% endif %}
-          {%
-          with
-              message = displayed_message,
-              type = "destructive" if category == 'error' else "success"
-          %}
-<div class={{ "callout--warning" if category == 'error' else "callout" }}>
-          {% include "toolkit/notification-banner.html" %}
-</div>
-          {% endwith %}
-      {% endfor %}
-  {% endif %}
-  {% endwith %}
 
-  {% with heading = team_id|string + ' - ' + title if title %}
-    {% include "toolkit/page-heading.html" %}
-  {% endwith %}
+  <div>
+    {{team_id}}
+  </div>
 
-{% if team %}
-<div>
-  <hr/>
-  <h3>Team Details</h3>
-  Organisation: {{brief.organisation}}
-  <br/>
-  ContactNumber: {{brief.contactNumber}}
-  <hr/>
-  <h3>Users</h3>
-  {% call(item) summary.list_table(
-          users,
-          caption="Buyers",
-          empty_message="No buyers to show",
-          field_headings=[
-              'Name',
-              'Email',
-              'Phone number'
-          ],
-          field_headings_visible=True)
-      %}
-
-      {% call summary.row() %}
-
-        {{ summary.field_name(item.name) }}
-
-        {% call summary.field() %}
-          {{ item.emailAddress }}
-        {% endcall %}
-
-        {% call summary.field() %}
-          {{ item.phoneNumber }}
-        {% endcall %}
-
-      {% endcall %}
-
-  {% endcall %}
-</div>
-
-{% endif %}
 {% endblock %}

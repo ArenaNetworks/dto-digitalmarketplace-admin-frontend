@@ -16,8 +16,8 @@ def find_team_by_team_id():
 
     try:
         # /api/admin/team/<id:int>
-        # teams = data_api_client.req.admin().team(team_id).get()
-        
+        teams = data_api_client.req.admin().team(team_id).get()
+    import pdb; pdb.set_trace()
     except:  # noqa
         flash('no_team', 'error')
         return render_template(
