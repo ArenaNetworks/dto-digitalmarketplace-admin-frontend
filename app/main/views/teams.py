@@ -15,7 +15,9 @@ def find_team_by_team_id():
     team_id = request.args.get('team_id')
 
     try:
-        teams = data_api_client.get_team(team_id).get('teams')
+        # /api/admin/team/<id:int>
+        # teams = data_api_client.req.admin().team(team_id).get()
+        
     except:  # noqa
         flash('no_team', 'error')
         return render_template(
