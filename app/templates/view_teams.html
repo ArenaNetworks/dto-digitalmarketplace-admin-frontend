@@ -42,9 +42,12 @@ Buyers – Digital Marketplace admin
   <h3> Team Members</h3>
   {% for i in team.teamMembers %}
       {% for key, value in team.teamMembers[i].items() %}
-          {% if key == 'name' or key =='emailAddress' %}
-            {{key}}: {{value}}
-            <br/>
+          {% if key == 'emailAddress'%}
+          email address: {{value}}
+          <br/>
+         {% elif key == 'name'%}
+          name :{{value}}
+          <br/>
           {% endif %}
       {% endfor %}
     {% endfor %}
@@ -54,13 +57,31 @@ Buyers – Digital Marketplace admin
     <h3> Team Members' Permissions</h3>
     {% for i in team.teamMembers %}
         {% for key, value in team.teamMembers[i].items() %}
+          {% if key == 'emailAddress'%}
+            email address: {{value}}
+            <br/>
+           {% elif key == 'name'%}
+            name :{{value}}
+            <br/>
+          {% elif key == 'permissions' %}
+            permissions:<br/>
+            <table>
+            {% for pk, pv in value.items() %}
+              <tr>
+
+                <td>{{ pk  | replace("_"," ")}}</td>
+                <td>{{pv}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+          {% else %}
               {{key}}
               {{value}}
               <br/>
+              <br/>
+          {% endif %}
         {% endfor %}
       {% endfor %}
-
-    <br>
-    <h2>{{team.teamMembers}}</h2>
 </div>
+
 {% endblock %}
