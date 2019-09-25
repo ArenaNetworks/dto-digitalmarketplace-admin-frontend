@@ -3,11 +3,11 @@
 {% extends "_base_page.html" %}
 
 {% block page_title %}
-    Buyers – Digital Marketplace admin
+Buyers – Digital Marketplace admin
 {% endblock %}
 
 {% block breadcrumb %}
-  {%
+{%
       with items = [
           {
               "link": url_for('.index'),
@@ -15,24 +15,36 @@
           },
       ]
   %}
-    {% include "_breadcrumb.html" %}
-  {% endwith %}
+{% include "_breadcrumb.html" %}
+{% endwith %}
 {% endblock %}
 
 {% block main_content %}
-  <div>
-    <h3>Team Details</h3>
-    Team ID: {{team_id}}
-    <br/>
-    Team Name: {{team.name}}
-    <br/> 
-    Team Leads: {{team.teamLeads}}
-  </div>
+<div>
+  <h3>Team Details</h3>
+  Team ID: {{team_id}}
+  <br/>
+  Team Name: {{team.name}}
+</div>
 
-<div> 
-  <h3> Team Member's Permissions</h3>
-  <br/> 
-
-
+<div>
+{% for i in team.teamLeads %}
+<h3> Team Leads Information</h3>
+  {% for key, value in team.teamLeads[i].items() %}
+       Key: {{key}}
+       Value: {{value}}
+       <br/>
+  {% endfor %}
+{% endfor %}
+</div>
+<div>
+    {% for i in team.teamMembers %}
+  <h3> Team Members</h3>
+      {% for key, value in team.teamMembers[i].items() %}
+       Key: {{key}}
+       Value: {{value}}
+       <br/>
+      {% endfor %}
+    {% endfor %}
 {% endblock %}
 </div>
