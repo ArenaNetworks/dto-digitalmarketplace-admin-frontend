@@ -256,18 +256,7 @@ def seller_feedback_email(brief_id):
 def find_team_by_team_id():
     team_id = request.args.get('team_id')
 
-    # try:
-        # /api/admin/team/<id:int>
-    team = data_api_client.req.team(team_id).get()
-        
-    # except:  # noqa
-    #     flash('no_team', 'error')
-    #     return render_template(
-    #         "view_teams.html",
-    #         users=list(),
-    #         team_id=team_id,
-    #         team=None
-    #     ), 404
+    team = data_api_client.req.admin().team(team_id).get()
 
     return render_template_with_csrf(
         "view_teams.html",

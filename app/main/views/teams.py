@@ -8,31 +8,17 @@ from ... import data_api_client
 from ..auth import role_required
 from dmapiclient.errors import HTTPError
 
-@main.route('/teams', methods=['GET'])
+
+@main.route('/team', methods=['GET'])
 @login_required
 @role_required('admin')
 def find_team_by_team_id():
     team_id = request.args.get('team_id')
 
-    try:
-        # /api/admin/team/<id:int>
-        teams = data_api_client.req.admin().team(team_id).get()
-    import pdb; pdb.set_trace()
-    except:  # noqa
-        flash('no_team', 'error')
-        return render_template(
-            "view_teams.html",
-            users=list(),
-            team_id=team_id,
-            teams=None
-        ), 404
+    team = data_api_client.req.team(team_id).get()
 
-    users = brief.get('users')
-    title = brief.get('title')
     return render_template_with_csrf(
         "view_teams.html",
-        users=users,
-        title=title,
         team_id=team_id,
-        teams=teams
+        team=team
     )
