@@ -38,13 +38,19 @@ Buyers – Digital Marketplace admin
 {% endfor %}
 </div>
 <div>
-    {% for i in team.teamMembers %}
   <h3> Team Members</h3>
+  {% for i in team.teamMembers %}
       {% for key, value in team.teamMembers[i].items() %}
-       Key: {{key}}
-       Value: {{value}}
-       <br/>
+          {% if key == 'permissions' %}
+          <h3> Team Members' Permissions</h3>
+            Key: {{key}}
+            Value: {{value}}
+          <br/>
+          {% else %}
+            {{key}}
+            {{value}}
+          {% endif %}
+
       {% endfor %}
     {% endfor %}
 {% endblock %}
-</div>
