@@ -28,14 +28,18 @@ Buyers – Digital Marketplace admin
 </div>
 
 <div>
-{% for i in team.teamLeads %}
-<h3> Team Leads Information</h3>
-  {% for key, value in team.teamLeads[i].items() %}
-       {{key}}
-       {{value}}
-       <br/>
+  {% for i in team.teamLeads %}
+  <h3> Team Leads Information</h3>
+    {% for key, value in team.teamLeads[i].items() %}
+        {% if key == 'emailAddress' %}
+          email address: {{ value }}
+          <br/>
+        {% else %}
+          name : {{ value }}
+          <br/>
+          {% endif %}
+      {% endfor %}
   {% endfor %}
-{% endfor %}
 </div>
 
 <div>
@@ -43,11 +47,12 @@ Buyers – Digital Marketplace admin
   {% for i in team.teamMembers %}
       {% for key, value in team.teamMembers[i].items() %}
           {% if key == 'emailAddress'%}
-          email address: {{value}}
-          <br/>
+            email address: {{value}}
+            <br/>
          {% elif key == 'name'%}
-          name :{{value}}
-          <br/>
+            name : {{value}}
+            <br/>
+            <br/>
           {% endif %}
       {% endfor %}
     {% endfor %}
@@ -57,31 +62,30 @@ Buyers – Digital Marketplace admin
     <h3> Team Members' Permissions</h3>
     {% for i in team.teamMembers %}
         {% for key, value in team.teamMembers[i].items() %}
-          {% if key == 'emailAddress'%}
-            email address: {{value}}
-            <br/>
-           {% elif key == 'name'%}
-            name :{{value}}
-            <br/>
-          {% elif key == 'permissions' %}
-            permissions:<br/>
-            <table>
-            {% for pk, pv in value.items() %}
-              <tr>
-
-                <td>{{ pk  | replace("_"," ")}}</td>
-                <td>{{pv}}</td>
-              </tr>
+            {% if key == 'emailAddress'%}
+              email address: {{value}}
+              <br/>
+            {% elif key == 'name'%}
+              name: {{value}}
+              <br/>
+            {% elif key == 'permissions' %}
+              <br/>Permissions:<br/> 
+              <table>
+              {% for pk, pv in value.items() %}
+                <tr>
+                  <td>{{ pk  | replace("_"," ")}}</td>
+                  <td>: {{pv}}</td>
+                </tr>
             {% endfor %}
-          </table>
-          {% else %}
-              {{key}}
-              {{value}}
-              <br/>
-              <br/>
-          {% endif %}
-        {% endfor %}
+            </table>
+            {% else %}
+                {{key}}
+                {{value}}
+                <br/>
+                <br/>
+            {% endif %}
       {% endfor %}
+    {% endfor %}
 </div>
 
 {% endblock %}
