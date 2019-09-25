@@ -14,7 +14,6 @@ from dmapiclient.errors import HTTPError
 @role_required('admin')
 def find_team_by_team_id():
     team = data_api_client.req.team(team_id).get()
-
     return render_template_with_csrf(
         "view_teams.html",
         team=team
