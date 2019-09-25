@@ -31,8 +31,8 @@ Buyers – Digital Marketplace admin
 {% for i in team.teamLeads %}
 <h3> Team Leads Information</h3>
   {% for key, value in team.teamLeads[i].items() %}
-       Key: {{key}}
-       Value: {{value}}
+       {{key}}
+       {{value}}
        <br/>
   {% endfor %}
 {% endfor %}
@@ -43,14 +43,14 @@ Buyers – Digital Marketplace admin
       {% for key, value in team.teamMembers[i].items() %}
           {% if key == 'permissions' %}
           <h3> Team Members' Permissions</h3>
-            Key: {{key}}
-            Value: {{value}}
-          <br/>
+            {{key}}
+            {{value}}
+            <br/>
           {% else %}
             {{key}}
             {{value}}
+            <br/>
           {% endif %}
-
       {% endfor %}
     {% endfor %}
 {% endblock %}
