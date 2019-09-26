@@ -18,4 +18,3 @@ def find_team_by_team_id():
         "view_teams.html",
         team=team
     )
-    
