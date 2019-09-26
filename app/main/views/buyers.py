@@ -258,7 +258,26 @@ def seller_feedback_email(brief_id):
 def find_team_by_team_id():
     team_id = request.args.get('team_id')
 
-    team = data_api_client.req.admin().team(team_id).get()
+    team_info = data_api_client.req.admin().team(team_id).get()
+    team = team_info.get('team')
+    briefs = team_info.get('briefs')
+
+    return render_template_with_csrf(
+        "view_teams.html",
+        team_id=team_id,
+        team=team,
+        briefs=briefs
+    )
+
+@main.route('/', methods=['GET'])
+@login_required
+@role_required('admin')
+def find_brief_by_team_id():
+    team_id = request.args.get('team_id')
+
+    team_info = data_api_client.req.admin().team(team_id).get()
+    team = team_info.get('team')
+    briefs = team_info.get('briefs')
 
     return render_template_with_csrf(
         "view_teams.html",
