@@ -94,7 +94,7 @@ Buyers – Digital Marketplace admin
     {% for b in briefs %}
           <tr>
             <td> <a href="{{ url_for('.find_buyer_by_brief_id', brief_id=b.brief_id) }}" class="question">{{ b.brief_id }}</a></td>
-            <td>{{b.name}}</td>
+            <td>{{ b.name }}</td>
           </tr>
     {% endfor %}
     </table>
