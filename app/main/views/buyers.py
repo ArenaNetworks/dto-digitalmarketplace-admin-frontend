@@ -94,6 +94,7 @@ def find_buyer_by_brief_id():
         area_of_expertise_selected=brief.get('areaOfExpertise', '')
     )
 
+
 @main.route('/brief/<int:brief_id>', methods=['POST'])
 @login_required
 @role_required('admin')
@@ -249,6 +250,7 @@ def seller_feedback_email(brief_id):
 
     flash('seller_feedback_email', 'info')
     return redirect(url_for('.find_buyer_by_brief_id', brief_id=brief_id))
+
 
 @main.route('/team', methods=['GET'])
 @login_required
