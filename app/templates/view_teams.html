@@ -47,10 +47,10 @@ Buyers – Digital Marketplace admin
   {% for i in team.teamMembers %}
       {% for key, value in team.teamMembers[i].items() %}
           {% if key == 'emailAddress'%}
-            email address: {{value}}
+            email address: {{ value }}
             <br/>
          {% elif key == 'name'%}
-            name : {{value}}
+            name : {{ value }}
             <br/>
             <br/>
           {% endif %}
@@ -63,18 +63,18 @@ Buyers – Digital Marketplace admin
     {% for i in team.teamMembers %}
         {% for key, value in team.teamMembers[i].items() %}
             {% if key == 'emailAddress'%}
-              email address: {{value}}
+              email address: {{ value }}
               <br/>
             {% elif key == 'name'%}
-              name: {{value}}
+              name: {{ value }}
               <br/>
             {% elif key == 'permissions' %}
               <br/>Permissions:<br/> 
               <table>
-              {% for pk, pv in value.items() %}
+              {% for permissionKey, permissionValue in value.items() %}
                 <tr>
-                  <td>{{ pk  | replace("_"," ")}}</td>
-                  <td>: {{pv}}</td>
+                  <td>{{ permissionKey  | replace("_"," ")}}</td>
+                  <td>: {{ permissionValue }}</td>
                 </tr>
             {% endfor %}
             </table>
