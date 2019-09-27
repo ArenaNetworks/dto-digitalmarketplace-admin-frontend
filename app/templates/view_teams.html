@@ -29,7 +29,7 @@ Buyers – Digital Marketplace admin
 
 <div>
   {% for i in team.teamLeads %}
-  <h3> Team Leads Information</h3>
+  <h3>Team Leads Information</h3>
     {% for key, value in team.teamLeads[i].items() %}
         {% if key == 'emailAddress' %}
           email address: {{ value }}
