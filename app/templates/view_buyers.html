@@ -209,7 +209,7 @@
       <br/>
       <input type="submit" value="Search" class="button-save">
   </form>
-  <br />  
+  <br />
   {% if brief.status == 'live' %}
     <dialog id="withdraw-dialog">
         <form action="{{ url_for('.withdraw_brief', brief_id=brief_id) }}" method="post">
