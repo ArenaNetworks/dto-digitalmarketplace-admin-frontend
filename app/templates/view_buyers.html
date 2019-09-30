@@ -53,7 +53,6 @@
     {% include "toolkit/page-heading.html" %}
   {% endwith %}
 
-{% if brief %}
 <div>
   <hr/>
   <h3>Brief Details</h3>
@@ -61,6 +60,9 @@
   <br/>
   Contact Number: {{brief.contactNumber}}
   <hr/>
+</div>
+
+<div>
   <h3>Users</h3>
   {% call(item) summary.list_table(
           users,
@@ -199,7 +201,7 @@
       <button id="seller-request-feedback-email">Send seller requested feedback email to buyer</button>
     </form>
     <br />
-{% endif %}
+
   <form action="{{ url_for('.find_buyer_by_brief_id') }}" method="get" class="question">
       <label class="question-heading" for="brief_id">Find buyer by opportunity ID</label>
       <p class='hint'>
