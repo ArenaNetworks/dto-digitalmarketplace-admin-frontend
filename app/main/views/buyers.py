@@ -71,6 +71,8 @@ def find_buyer_by_brief_id():
 
     try:
         brief = data_api_client.get_brief(brief_id).get('briefs')
+        teams = data_api_client.req.admin().buyers(brief_id).teams().get()
+    
     except:  # noqa
         flash('no_brief', 'error')
         return render_template(
@@ -91,7 +93,9 @@ def find_buyer_by_brief_id():
         seller_email_list=convert_array_to_string(brief.get('sellerEmailList', [])),
         seller_email=brief.get('sellerEmail', ''),
         area_of_expertise_list=AREA_OF_EXPERTISE_LIST,
-        area_of_expertise_selected=brief.get('areaOfExpertise', '')
+        area_of_expertise_selected=brief.get('areaOfExpertise', ''),
+        teams_exists=len(teams)>0
+        # test= test
     )
 
 
@@ -286,15 +290,14 @@ def find_brief_by_team_id():
     )
 
 
-@main.route('/', methods=['GET'])
-@login_required
-@role_required('admin')
-def brief_id_exist_in_team(brief_id):
+# @main.route('/', methods=['GET'])
+# @login_required
+# @role_required('admin')
+# def brief_id_exist_in_team(brief_id):
 
-    brief_id = request.args.get('brief_id')
-    team_info = data_api_client.req.admin().team(brief_id).get()
+#     brief_id = request.args.get('brief_id')
     
-    return render_template_with_csrf(
-        "view_teams.html",
-        brief_id = brief_id
-    )
+#     return render_template_with_csrf(
+#         "view_buyers.html",
+#         brief_id = brief_id
+#     )
