@@ -284,3 +284,17 @@ def find_brief_by_team_id():
         team_id=team_id,
         team=team
     )
+
+
+@main.route('/', methods=['GET'])
+@login_required
+@role_required('admin')
+def brief_id_exist_in_team(brief_id):
+
+    brief_id = request.args.get('brief_id')
+    team_info = data_api_client.req.admin().team(brief_id).get()
+    
+    return render_template_with_csrf(
+        "view_teams.html",
+        brief_id = brief_id
+    )

@@ -63,34 +63,37 @@
 </div>
 
 <div>
-  <h3>Users</h3>
-  {% call(item) summary.list_table(
-          users,
-          caption="Buyers",
-          empty_message="No buyers to show",
-          field_headings=[
-              'Name',
-              'Email',
-              'Phone number'
-          ],
-          field_headings_visible=True)
-      %}
+  {% if brief_id_exist_in_team == none %}
+    print helloWorld
+    <h3>Users</h3>
+    {% call(item) summary.list_table(
+            users,
+            caption="Buyers",
+            empty_message="No buyers to show",
+            field_headings=[
+                'Name',
+                'Email',
+                'Phone number'
+            ],
+            field_headings_visible=True)
+        %}
 
-      {% call summary.row() %}
+        {% call summary.row() %}
 
-        {{ summary.field_name(item.name) }}
+            {{ summary.field_name(item.name) }}
 
-        {% call summary.field() %}
-          {{ item.emailAddress }}
+            {% call summary.field() %}
+            {{ item.emailAddress }}
+            {% endcall %}
+
+            {% call summary.field() %}
+            {{ item.phoneNumber }}
+            {% endcall %}
+
         {% endcall %}
 
-        {% call summary.field() %}
-          {{ item.phoneNumber }}
-        {% endcall %}
-
-      {% endcall %}
-
-  {% endcall %}
+    {% endcall %}
+    {% endif %}
 
   <br>
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
