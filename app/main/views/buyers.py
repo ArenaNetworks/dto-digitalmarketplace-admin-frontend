@@ -95,7 +95,6 @@ def find_buyer_by_brief_id():
         area_of_expertise_list=AREA_OF_EXPERTISE_LIST,
         area_of_expertise_selected=brief.get('areaOfExpertise', ''),
         teams_exists=len(teams)>0
-        # test= test
     )
 
 
