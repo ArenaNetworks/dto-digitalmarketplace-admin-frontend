@@ -71,7 +71,8 @@ def find_buyer_by_brief_id():
     try:
         brief = data_api_client.get_brief(brief_id).get('briefs')
         teams = data_api_client.req.admin().buyers(brief_id).teams().get()
-    
+        teams_exists= teams.get(u'list_brief_ids')
+
     except:  # noqa
         flash('no_brief', 'error')
         return render_template(
@@ -83,7 +84,7 @@ def find_buyer_by_brief_id():
 
     users = brief.get('users')
     title = brief.get('title')
-    # print(teams)
+    
     return render_template_with_csrf(
         "view_buyers.html",
         users=users,
@@ -94,7 +95,7 @@ def find_buyer_by_brief_id():
         seller_email=brief.get('sellerEmail', ''),
         area_of_expertise_list=AREA_OF_EXPERTISE_LIST,
         area_of_expertise_selected=brief.get('areaOfExpertise', ''),
-        teams_exists=len(teams)>0
+        teams_exists=len(teams_exists)>0
     )
 
 
