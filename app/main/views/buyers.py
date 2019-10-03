@@ -68,7 +68,6 @@ def update_brief_data(brief_id):
 @role_required('admin')
 def find_buyer_by_brief_id():
     brief_id = request.args.get('brief_id')
-
     try:
         brief = data_api_client.get_brief(brief_id).get('briefs')
         teams = data_api_client.req.admin().buyers(brief_id).teams().get()
@@ -78,12 +77,13 @@ def find_buyer_by_brief_id():
         return render_template(
             "view_buyers.html",
             users=list(),
-            brief_id=brief_id,
+            brief_id=brief_id,  
             brief=None
         ), 404
 
     users = brief.get('users')
     title = brief.get('title')
+    # print(teams)
     return render_template_with_csrf(
         "view_buyers.html",
         users=users,

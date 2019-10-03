@@ -61,38 +61,40 @@
   Contact Number: {{brief.contactNumber}}
   <hr/>
 </div>
-
+ 
 <div>
-    {% if teams_exists >= 0 %}
-        <h3>Users</h3>
-        {% call(item) summary.list_table(
-                users,
-                caption="Buyers",
-                empty_message="No buyers to show",
-                field_headings=[
-                    'Name',
-                    'Email',
-                    'Phone number'
-                ],
-                field_headings_visible=True)
-            %}
+    {% if teams_exists and teams_exists >= 0 %}
+       <h1> HI</h1>
+ 
+    {% else %}
+    <h3>Users</h3>
+    {% call(item) summary.list_table(
+            users,
+            caption="Buyers",
+            empty_message="No buyers to show",
+            field_headings=[
+                'Name',
+                'Email',
+                'Phone number'
+            ],
+            field_headings_visible=True)
+        %}
 
-            {% call summary.row() %}
+        {% call summary.row() %}
 
-                {{ summary.field_name(item.name) }}
+            {{ summary.field_name(item.name) }}
 
-                {% call summary.field() %}
-                {{ item.emailAddress }}
-                {% endcall %}
+            {% call summary.field() %}
+            {{ item.emailAddress }}
+            {% endcall %}
 
-                {% call summary.field() %}
-                {{ item.phoneNumber }}
-                {% endcall %}
-
+            {% call summary.field() %}
+            {{ item.phoneNumber }}
             {% endcall %}
 
         {% endcall %}
-    {% endif %} 
+
+    {% endcall %}
         
   <br>
     <form action="{{ url_for('.update_brief',brief_id=brief_id) }}" method="post" class="question">
@@ -110,6 +112,7 @@
         <input type="submit" value="Save" class="button-save">
     </form>
     
+    {% endif %} 
 
 <div>
     <hr>
@@ -246,5 +249,4 @@
         </script>
     {% endblock %}
   {% endif %}
-
 {% endblock %}
