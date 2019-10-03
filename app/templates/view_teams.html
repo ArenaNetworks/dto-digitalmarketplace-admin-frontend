@@ -34,9 +34,41 @@ Buyers – Digital Marketplace admin
   <br/>
   <h1> Teams Table</h1>
   <br/>
+  <table>
+      {% for i in team.teamLeads %}
+        {% for key, value in team.teamLeads[i].items() %}
+      <TR>
+         <TD class="name and email address">{{ value }}</TD>
+      </TR>
+        {% endfor %}
+      {% endfor %}
+      </table>
+
 </div>
 
 
+<div> 
+  <br/>
+  <h1> Attempt 2 of table</h1>
+  <br/>
+  {% call(item) summary.list_table(
+      teams,
+      caption="Teams",
+      field_headings=[
+          'Name',
+          'Email'
+      ],
+      field_headings_visible=True)
+    %}
+      {% call summary.row() %}
+          {{ summary.field_name(item.name) }}
+          {% call summary.field() %}
+              {{ item.email_address }}
+          {% endcall %}
+      {% endcall %}
+  {% endcall %}
+
+</div>
 
 
 <div>
@@ -101,7 +133,7 @@ Buyers – Digital Marketplace admin
 </div>
 
 <div>
-
+<h3> List of Team Briefs</h3>
     <table>
     {% for b in briefs %}
           <tr>
