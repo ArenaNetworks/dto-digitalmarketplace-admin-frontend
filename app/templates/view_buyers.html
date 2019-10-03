@@ -64,8 +64,24 @@
  
 <div>
     {% if teams_exists and teams_exists >= 0 %}
-    <h3> hi teams</h3>
-    
+    <h3> Team Brief Users</h3>
+    {% call(item) summary.list_table(
+            teams,
+            caption="Buyers",
+            empty_message="No buyers to show",
+            field_headings=[
+                'Name',
+                'Email'
+            ],
+            field_headings_visible=True)
+        %}
+            {% call summary.row() %}
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                    {{ item.email_address }}
+                {% endcall %}
+            {% endcall %}
+        {% endcall %}
     {% else %}
     <h3>Users</h3>
     {% call(item) summary.list_table(
