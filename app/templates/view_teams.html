@@ -35,41 +35,27 @@ Buyers – Digital Marketplace admin
   <h1> Teams Table</h1>
   <br/>
   <table>
+      <thead><tr><th>Name and Email Address</th><th>Team Lead</th><th>Create drafts</th><th>Publish opporunites</th><th>Answer seller questions</th><th>Download responses</th><th>Create work orders</th></tr></thead>
       {% for i in team.teamLeads %}
         {% for key, value in team.teamLeads[i].items() %}
+       
+        <tbody>
       <TR>
          <TD class="name and email address">{{ value }}</TD>
+         <TD class="Team Lead"> hello </TD>
+         <TD class="Create drafts"> {{ permissionValue }} </TD>
+         <TD class="Published opporunites"> {{ permissionValue }} </TD>
+         <TD class="Answer seller questions"> {{ permissionValue }} </TD>
+         <TD class="Download responses"> {{ permissionValue }} </TD>
+         <TD class="Create work orders"> {{ permissionValue }} </TD>
       </TR>
         {% endfor %}
       {% endfor %}
+
+    </tbody>
       </table>
 
 </div>
-
-
-<div> 
-  <br/>
-  <h1> Attempt 2 of table</h1>
-  <br/>
-  {% call(item) summary.list_table(
-      teams,
-      caption="Teams",
-      field_headings=[
-          'Name',
-          'Email'
-      ],
-      field_headings_visible=True)
-    %}
-      {% call summary.row() %}
-          {{ summary.field_name(item.name) }}
-          {% call summary.field() %}
-              {{ item.email_address }}
-          {% endcall %}
-      {% endcall %}
-  {% endcall %}
-
-</div>
-
 
 <div>
   {% for i in team.teamLeads %}
