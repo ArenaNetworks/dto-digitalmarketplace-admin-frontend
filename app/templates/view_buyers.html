@@ -76,7 +76,8 @@
             {% call summary.row() %}
                 {{ summary.field_name(item.name) }}
                 {% call summary.field() %}
-                    {{ item.email_address }}
+                <a href="{{ url_for('.find_user_by_email_address') }}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
                 {% endcall %}
             {% endcall %}
         {% endcall %}
@@ -125,11 +126,7 @@
         <br/>
         <input type="submit" value="Save" class="button-save">
     </form>
-
-    
     {% endif %} 
-
-
 
 
 <div>
