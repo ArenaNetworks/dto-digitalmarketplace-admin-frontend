@@ -29,33 +29,71 @@ Buyers – Digital Marketplace admin
   Team Email Address : {{team.emailAddress}}
 </div>
 
+<div>
+    <h3> Team Brief Users</h3>
+    {% call(item) summary.list_table(
+            team.teamLeads,
+            field_headings=[
+                'Email Address',
+                'Name',
+                'Team Leads',
+                'Create Drafts',
+                'Publish Opporunities',
+                'Answer Seller Questions',
+                'Download Responses', 
+                'Download Reports',
+                'Create Work Orders'
+            ],
+            field_headings_visible=True)
+        %}
+            {% call summary.row() %}
+            {% for i in team.teamLeads %}
+              {% for key, value in team.teamLeads[i].items() %}
+                  {{ summary.field_name(value) }}
+                  <!-- {% call summary.field() %} -->
+               
+                  {% endcall %}
+              {% endfor %}
+              {% endfor %}
 
-<div> 
-  <br/>
-  <h1> Teams Table</h1>
-  <br/>
-  <table>
-      <thead><tr><th>Name and Email Address</th><th>Team Lead</th><th>Create drafts</th><th>Publish opporunites</th><th>Answer seller questions</th><th>Download responses</th><th>Create work orders</th></tr></thead>
-      {% for i in team.teamLeads %}
-        {% for key, value in team.teamLeads[i].items() %}
-       
-        <tbody>
-      <TR>
-         <TD class="name and email address">{{ value }}</TD>
-         <TD class="Team Lead"> hello </TD>
-         <TD class="Create drafts"> {{ permissionValue }} </TD>
-         <TD class="Published opporunites"> {{ permissionValue }} </TD>
-         <TD class="Answer seller questions"> {{ permissionValue }} </TD>
-         <TD class="Download responses"> {{ permissionValue }} </TD>
-         <TD class="Create work orders"> {{ permissionValue }} </TD>
-      </TR>
-        {% endfor %}
-      {% endfor %}
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = item.email_address)}}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
+                {% endcall %}
 
-    </tbody>
-      </table>
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = item.email_address)}}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
+                {% endcall %}
 
-</div>
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = item.email_address)}}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
+                {% endcall %}
+
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = item.email_address)}}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
+                {% endcall %}
+
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = item.email_address)}}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
+                {% endcall %}
+
+                {{ summary.field_name(item.name) }}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = item.email_address)}}" method="get"  class="question">{{ item.email_address }}</a>    
+                <!-- {{ item.email_address }} -->
+                {% endcall %}
+
+            {% endcall %}
+        {% endcall %}
 
 <div>
   {% for i in team.teamLeads %}
