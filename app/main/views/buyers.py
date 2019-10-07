@@ -69,6 +69,7 @@ def update_brief_data(brief_id):
 def find_buyer_by_brief_id():
     brief_id = request.args.get('brief_id')
     teams = []
+
     try:
         brief = data_api_client.get_brief(brief_id).get('briefs')
         teams = data_api_client.req.admin().buyers(brief_id).teams().get()
