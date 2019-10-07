@@ -33,16 +33,15 @@ Buyers – Digital Marketplace admin
     <h3> Team Leads</h3>
     {% call(item) summary.list_table(
             team.teamLeads,
-            field_headings=[
-                'Email Address',
-                'Name',
-                'Team Leads',
-                'Create Drafts',
-                'Publish Opporunities',
-                'Answer Seller Questions',
-                'Download Responses', 
-                'Download Reports',
-                'Create Work Orders'
+            field_headings=[                    
+            'Email Address',
+            'Name',
+            'Download Reports',
+            'Publish Opporunities',
+            'Create Drafts',
+            'Download Responses',
+            'Answer Seller Questions', 
+            'Create Work Orders'
             ],
             field_headings_visible=True)
         %}
