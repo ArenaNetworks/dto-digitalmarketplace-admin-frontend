@@ -30,66 +30,66 @@
   </div>
 
   <div>
-      <h3> Team Lead and Members' Permissions</h3>
-      {% call(item) summary.list_table(
-              team.teamLeads,
-              field_headings=[                    
-              'Email Address',
-              'Name',
-              'Team Lead',
-              'Download Reports',
-              'Publish Opporunities',
-              'Create Drafts',
-              'Download Responses',
-              'Answer Seller Questions', 
-              'Create Work Orders'
-              ],
-              field_headings_visible=True)
-          %}
-              {% call summary.row() %}
-              {% for i in team.teamLeads %}
-                {% for key, value in team.teamLeads[i].items() %}
-                  {% if key == 'emailAddress' %}
-                    {% call summary.field() %}
-                    <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
-                    {% endcall %}
-                  {% else %}
-                    {{ summary.field_name(value) }}
-                    <!-- {% call summary.field() %} -->  
-                    {% endcall %}
-                      {% endif %}
-                {% endfor %}
-                {% for i in range(7) %}
-                  {{ summary.field_name(True) }}
-                {% endfor %}
-                {% endfor %}
-              {% endcall %}
-              {% call summary.row() %}
-              {% for i in team.teamMembers %}
-                {% for key, value in team.teamMembers[i].items() %}
+    <h3> Team Lead and Members' Permissions</h3>
+    {% call(item) summary.list_table(
+            team.teamLeads,
+            field_headings=[                    
+            'Email Address',
+            'Name',
+            'Team Lead',
+            'Download Reports',
+            'Publish Opporunities',
+            'Create Drafts',
+            'Download Responses',
+            'Answer Seller Questions', 
+            'Create Work Orders'
+            ],
+            field_headings_visible=True)
+        %}
+            {% call summary.row() %}
+            {% for i in team.teamLeads %}
+              {% for key, value in team.teamLeads[i].items() %}
                 {% if key == 'emailAddress' %}
                   {% call summary.field() %}
-                  <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
+                    <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
                   {% endcall %}
-                  {% elif key != 'permissions' %}
-                    {{ summary.field_name(value) }}
-                  {% else %}
-                    {{ summary.field_name('False') }}
-                      {% for permissionKey, permissionValue in value.items() %}
-                      <td>{{ permissionValue  | replace(":"," ")}}</td>
-                      {% if permissionKey == 'create_work_orders' %}
-                        {% call summary.row() %}
-                        {% endcall %}
-                        {% endif %}
-                    {% endfor %}
+                {% else %}
+                  {{ summary.field_name(value) }}
+                  <!-- {% call summary.field() %} -->  
+                  {% endcall %}
                     {% endif %}
-                    <!-- {% call summary.field() %} -->  
-                    {% endcall %}
+              {% endfor %}
+              {% for i in range(7) %}
+                {{ summary.field_name(True) }}
+              {% endfor %}
+              {% endfor %}
+            {% endcall %}
+            {% call summary.row() %}
+            {% for i in team.teamMembers %}
+              {% for key, value in team.teamMembers[i].items() %}
+              {% if key == 'emailAddress' %}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
+                {% endcall %}
+                {% elif key != 'permissions' %}
+                  {{ summary.field_name(value) }}
+                {% else %}
+                  {{ summary.field_name('False') }}
+                    {% for permissionKey, permissionValue in value.items() %}
+                    <td>{{ permissionValue  | replace(":"," ")}}</td>
+                    {% if permissionKey == 'create_work_orders' %}
+                      {% call summary.row() %}
+                      {% endcall %}
+                      {% endif %}
                   {% endfor %}
+                  {% endif %}
+                  <!-- {% call summary.field() %} -->  
+                  {% endcall %}
                 {% endfor %}
-          {% endcall %}
-          {% endcall %}
-      </div>
+              {% endfor %}
+        {% endcall %}
+        {% endcall %}
+  </div>
 
   <div>
   <h3> Team Briefs</h3>
