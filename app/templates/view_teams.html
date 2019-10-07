@@ -74,12 +74,10 @@ Buyers – Digital Marketplace admin
                 field_headings=[
                     'Email Address',
                     'Name',
-                    'Team Leads',
-                    'Create Drafts',
-                    'Publish Opporunities',
-                    'Answer Seller Questions',
-                    'Download Responses', 
                     'Download Reports',
+                    'Publish Opporunities',
+                    'Create Drafts',
+                    'Answer Seller Questions', 
                     'Create Work Orders'
                 ],
                 field_headings_visible=True)
@@ -91,17 +89,39 @@ Buyers – Digital Marketplace admin
                       <!-- {% call summary.field() %} -->  
                       {% endcall %}
                   {% endfor %}
-                  {{ summary.field_name(True) }}
-                  {{ summary.field_name(True) }}
-                  {{ summary.field_name(True) }}
-                  {{ summary.field_name(True) }}
-                  {{ summary.field_name(True) }}
-                  {{ summary.field_name(True) }}
-                  {{ summary.field_name(True) }}
                   {% endfor %}
                 {% endcall %}
             {% endcall %}
         </div>
+
+
+
+        <div>
+            <h3> Team Members</h3>
+            {% call(item) summary.list_table(
+                    team.teamMembers,
+                    field_headings=[
+                        'Email Address',
+                        'Name',
+                        'Download Reports',
+                        'Publish Opporunities',
+                        'Create Drafts',
+                        'Answer Seller Questions', 
+                        'Create Work Orders'
+                    ],
+                    field_headings_visible=True)
+                %}
+                    {% call summary.row() %}
+                    {% for i in team.teamMembers %}
+                      {% for key, value in team.teamMembers[i].items() %}
+                          {{ summary.field_name(value) }}
+                          <!-- {% call summary.field() %} -->  
+                          {% endcall %}
+                      {% endfor %}
+                      {% endfor %}
+                    {% endcall %}
+                {% endcall %}
+            </div>
 
 <div>
   {% for i in team.teamLeads %}
