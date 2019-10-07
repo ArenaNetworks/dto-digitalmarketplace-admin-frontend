@@ -61,39 +61,39 @@ Buyers – Digital Marketplace admin
     </div>
 
 
-    <div>
-        <h3> Team Members' Permissions</h3>
-        {% call(item) summary.list_table(
-                team.teamMembers,
-                field_headings=[
-                    'Email Address',
-                    'Name',
-                    'Download Reports',
-                    'Publish Opporunities',
-                    'Create Drafts',
-                    'Download Responses',
-                    'Answer Seller Questions', 
-                    'Create Work Orders'
-                ],
-                field_headings_visible=True)
-            %}
-                {% call summary.row() %}
-                {% for i in team.teamMembers %}
-                  {% for key, value in team.teamMembers[i].items() %}
-                    {% if key != 'permissions' %}
-                      {{ summary.field_name(value) }}
-                    {% else %}
-                        {% for permissionKey, permissionValue in value.items() %}
-                        <td>{{ permissionValue  | replace(":"," ")}}</td>
-                      {% endfor %}
-                      {% endif %}
-                      <!-- {% call summary.field() %} -->  
-                      {% endcall %}
+  <div>
+      <h3> Team Members' Permissions</h3>
+      {% call(item) summary.list_table(
+              team.teamMembers,
+              field_headings=[
+                  'Email Address',
+                  'Name',
+                  'Download Reports',
+                  'Publish Opporunities',
+                  'Create Drafts',
+                  'Download Responses',
+                  'Answer Seller Questions', 
+                  'Create Work Orders'
+              ],
+              field_headings_visible=True)
+          %}
+              {% call summary.row() %}
+              {% for i in team.teamMembers %}
+                {% for key, value in team.teamMembers[i].items() %}
+                  {% if key != 'permissions' %}
+                    {{ summary.field_name(value) }}
+                  {% else %}
+                      {% for permissionKey, permissionValue in value.items() %}
+                      <td>{{ permissionValue  | replace(":"," ")}}</td>
                     {% endfor %}
+                    {% endif %}
+                    <!-- {% call summary.field() %} -->  
+                    {% endcall %}
                   {% endfor %}
-                {% endcall %}
-            {% endcall %}
-        </div>
+                {% endfor %}
+              {% endcall %}
+          {% endcall %}
+      </div>
 
         <div> 
           <h1> test</h1>
