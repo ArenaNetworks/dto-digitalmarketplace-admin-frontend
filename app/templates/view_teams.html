@@ -53,13 +53,9 @@ Buyers – Digital Marketplace admin
                   <!-- {% call summary.field() %} -->  
                   {% endcall %}
               {% endfor %}
-              {{ summary.field_name(True) }}
-              {{ summary.field_name(True) }}
-              {{ summary.field_name(True) }}
-              {{ summary.field_name(True) }}
-              {{ summary.field_name(True) }}
-              {{ summary.field_name(True) }}
-              {{ summary.field_name(True) }}
+              {% for i in range(7) %}
+                {{ summary.field_name(True) }}
+              {% endfor %}
               {% endfor %}
             {% endcall %}
         {% endcall %}
