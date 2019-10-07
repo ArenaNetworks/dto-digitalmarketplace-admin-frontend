@@ -52,7 +52,7 @@ Buyers – Digital Marketplace admin
                   <!-- {% call summary.field() %} -->  
                   {% endcall %}
               {% endfor %}
-              {% for i in range(7) %}
+              {% for i in range(6) %}
                 {{ summary.field_name(True) }}
               {% endfor %}
               {% endfor %}
@@ -78,31 +78,31 @@ Buyers – Digital Marketplace admin
               field_headings_visible=True)
           %}
               {% call summary.row() %}
-              {% for i in team.teamMembers %}
-                {% for key, value in team.teamMembers[i].items() %}
+              {% for i in team.teamMembers -%}
+                {% for key, value in team.teamMembers[i].items() -%}
                   {% if key != 'permissions' %}
                     {{ summary.field_name(value) }}
                   {% else %}
-                      {% for permissionKey, permissionValue in value.items() %}
+                      {% for permissionKey, permissionValue in value.items() -%}
                       <td>{{ permissionValue  | replace(":"," ")}}</td>
-                    {% endfor %}
+                    {% endfor -%}
                     {% endif %}
                     <!-- {% call summary.field() %} -->  
                     {% endcall %}
-                  {% endfor %}
-                {% endfor %}
+                  {% endfor -%}
+                {% endfor -%}
               {% endcall %}
           {% endcall %}
       </div>
 
-        <div> 
-          <h1> test</h1>
-            {% for i in team.teamMembers %}
-              {% for key, value in team.teamMembers[i].items() %}
-              {{ summary.field_name(value) }}
-              {% endfor %}
-            {% endfor %}
-        </div>
+  <div> 
+    <h1> test</h1>
+      {% for i in team.teamMembers %}
+        {% for key, value in team.teamMembers[i].items() %}
+        {{ summary.field_name(value) }}
+        {% endfor %}
+      {% endfor %}
+  </div>
 
 <div>
   {% for i in team.teamLeads %}
