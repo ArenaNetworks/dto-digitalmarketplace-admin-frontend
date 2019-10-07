@@ -31,12 +31,13 @@ Buyers – Digital Marketplace admin
 
 <div>
 <div>
-    <h3> Team Lead and Members' Permissions</h3>
+    <h3> MERGED Team Lead and Members' Permissions</h3>
     {% call(item) summary.list_table(
             team.teamLeads,
             field_headings=[                    
             'Email Address',
             'Name',
+            'Team Lead',
             'Download Reports',
             'Publish Opporunities',
             'Create Drafts',
@@ -53,28 +54,32 @@ Buyers – Digital Marketplace admin
                   <!-- {% call summary.field() %} -->  
                   {% endcall %}
               {% endfor %}
-              {% for i in range(6) %}
+              {% for i in range(7) %}
                 {{ summary.field_name(True) }}
               {% endfor %}
               {% endfor %}
             {% endcall %}
             {% call summary.row() %}
-            {% for i in team.teamMembers -%}
-              {% for key, value in team.teamMembers[i].items() -%}
+            {% for i in team.teamMembers %}
+              {% for key, value in team.teamMembers[i].items() %}
                 {% if key != 'permissions' %}
                   {{ summary.field_name(value) }}
                 {% else %}
-                    {% for permissionKey, permissionValue in value.items() -%}
+                  {{ summary.field_name('False') }}
+                    {% for permissionKey, permissionValue in value.items() %}
                     <td>{{ permissionValue  | replace(":"," ")}}</td>
-                  {% endfor -%}
+                  {% endfor %}
                   {% endif %}
                   <!-- {% call summary.field() %} -->  
                   {% endcall %}
-                {% endfor -%}
-              {% endfor -%}
+                {% endfor %}
+              {% endfor %}
         {% endcall %}
         {% endcall %}
     </div>
+
+
+
 
 <div>
 <h3> List of Team Briefs</h3>
@@ -132,6 +137,18 @@ Buyers – Digital Marketplace admin
         {% endcall %}
     </div>
 
+    <br>
+
+    <br>    <br>    <br>    <br>    <br>
+    <div> 
+        <h3> Test</h3>
+        {% for i in team.teamMembers %}
+            {% for key, value in team.teamMembers[i].items() %}
+              {{ summary.field_name(key) }}
+              {{ summary.field_name(value) }}
+              {% endfor %}
+              {% endfor %}
+    </div>
 
   <div>
       <h3> Team Members' Permissions</h3>
@@ -150,31 +167,26 @@ Buyers – Digital Marketplace admin
               field_headings_visible=True)
           %}
               {% call summary.row() %}
-              {% for i in team.teamMembers -%}
-                {% for key, value in team.teamMembers[i].items() -%}
-                  {% if key != 'permissions' %}
-                    {{ summary.field_name(value) }}
+              {% for i in team.teamMembers %}
+                {% for key, value in team.teamMembers[i].items() %}
+                    {% if key != 'permissions'%}
+                      {{ summary.field_name(value) }}
                   {% else %}
-                      {% for permissionKey, permissionValue in value.items() -%}
+                      {% for permissionKey, permissionValue in value.items() %}
                       <td>{{ permissionValue  | replace(":"," ")}}</td>
-                    {% endfor -%}
+                      {% if permissionKey == 'create_work_orders' %}
+                        {{ summary.field_name(hello) }}
+                        {% endif %}
+                    {% endfor %}
                     {% endif %}
+
                     <!-- {% call summary.field() %} -->  
                     {% endcall %}
-                  {% endfor -%}
-                {% endfor -%}
+                  {% endfor %}
+                {% endfor %}
               {% endcall %}
           {% endcall %}
       </div>
-
-<div> 
-    <h1> test</h1>
-      {% for i in team.teamMembers %}
-        {% for key, value in team.teamMembers[i].items() %}
-        {{ summary.field_name(value) }}
-        {% endfor %}
-      {% endfor %}
-  </div>
 
 <div>
   {% for i in team.teamLeads %}
