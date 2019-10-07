@@ -30,10 +30,8 @@ Buyers – Digital Marketplace admin
 </div>
 
 <div>
-  <h1>Merged Team leads and Team Members</h1>
-
 <div>
-    <h3> Team Leads</h3>
+    <h3> Team Lead and Members' Permissions</h3>
     {% call(item) summary.list_table(
             team.teamLeads,
             field_headings=[                    
@@ -77,6 +75,19 @@ Buyers – Digital Marketplace admin
         {% endcall %}
         {% endcall %}
     </div>
+
+<div>
+<h3> List of Team Briefs</h3>
+    <table>
+    {% for b in briefs %}
+          <tr>
+            <td> <a href="{{ url_for('.find_buyer_by_brief_id', brief_id=b.brief_id) }}" class="question">{{ b.brief_id }}</a></td>
+            <td>{{ b.name }}</td>
+          </tr>
+    {% endfor %}
+    </table>
+</div>
+
 
 <br>
 <br>
@@ -156,7 +167,7 @@ Buyers – Digital Marketplace admin
           {% endcall %}
       </div>
 
-  <div> 
+<div> 
     <h1> test</h1>
       {% for i in team.teamMembers %}
         {% for key, value in team.teamMembers[i].items() %}
@@ -226,16 +237,5 @@ Buyers – Digital Marketplace admin
     {% endfor %}
 </div>
 
-<div>
-<h3> List of Team Briefs</h3>
-    <table>
-    {% for b in briefs %}
-          <tr>
-            <td> <a href="{{ url_for('.find_buyer_by_brief_id', brief_id=b.brief_id) }}" class="question">{{ b.brief_id }}</a></td>
-            <td>{{ b.name }}</td>
-          </tr>
-    {% endfor %}
-    </table>
-</div>
 
 {% endblock %}
