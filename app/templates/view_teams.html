@@ -89,8 +89,6 @@ Buyers – Digital Marketplace admin
                     {% else %}
                         {% for permissionKey, permissionValue in value.items() %}
                         <td>{{ permissionValue  | replace(":"," ")}}</td>
-                        <!-- <td>: {{ permissionValue }}</td> -->
-                            <!-- {{ summary.field_name(permissionValue) }} -->
                       {% endfor %}
                       {% endif %}
                       <!-- {% call summary.field() %} -->  
@@ -109,33 +107,6 @@ Buyers – Digital Marketplace admin
               {% endfor %}
             {% endfor %}
         </div>
-<!-- 
-        <div>
-            <h3> Team Members</h3>
-            {% call(item) summary.list_table(
-                    team.teamMembers,
-                    field_headings=[
-                        'Email Address',
-                        'Name',
-                        'Download Reports',
-                        'Publish Opporunities',
-                        'Create Drafts',
-                        'Answer Seller Questions', 
-                        'Create Work Orders'
-                    ],
-                    field_headings_visible=True)
-                %}
-                    {% call summary.row() %}
-                    {% for i in team.teamMembers %}
-                      {% for key, value in team.teamMembers[i].items() %}
-                          {{ summary.field_name(value) }}
-                          {% call summary.field() %} -->  
-                          <!-- {% endcall %}
-                      {% endfor %}
-                      {% endfor %}
-                    {% endcall %}
-                {% endcall %}
-            </div> -->
 
 <div>
   {% for i in team.teamLeads %}
