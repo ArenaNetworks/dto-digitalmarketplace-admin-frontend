@@ -49,9 +49,16 @@ Buyers – Digital Marketplace admin
             {% call summary.row() %}
             {% for i in team.teamLeads %}
               {% for key, value in team.teamLeads[i].items() %}
+                  {% if key == 'emailAddress' %}
+                  {% call summary.field() %}
+                  <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
+                  <!-- {{ item.email_address }} -->
+                  {% endcall %}
+                {% else %}
                   {{ summary.field_name(value) }}
                   <!-- {% call summary.field() %} -->  
                   {% endcall %}
+                     {% endif %}
               {% endfor %}
               {% for i in range(7) %}
                 {{ summary.field_name(True) }}
