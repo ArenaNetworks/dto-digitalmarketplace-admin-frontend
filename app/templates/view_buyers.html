@@ -223,6 +223,7 @@
       <button id="seller-request-feedback-email">Send seller requested feedback email to buyer</button>
     </form>
     <br />
+    {% endif %}
 
   <form action="{{ url_for('.find_buyer_by_brief_id') }}" method="get" class="question">
       <label class="question-heading" for="brief_id">Find buyer by opportunity ID</label>
