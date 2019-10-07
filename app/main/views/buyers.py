@@ -78,13 +78,13 @@ def find_buyer_by_brief_id():
         return render_template(
             "view_buyers.html",
             users=list(),
-            brief_id=brief_id,  
+            brief_id=brief_id,
             brief=None
         ), 404
 
     users = brief.get('users')
     title = brief.get('title')
-    
+
     return render_template_with_csrf(
         "view_buyers.html",
         users=users,
@@ -95,7 +95,7 @@ def find_buyer_by_brief_id():
         seller_email=brief.get('sellerEmail', ''),
         area_of_expertise_list=AREA_OF_EXPERTISE_LIST,
         area_of_expertise_selected=brief.get('areaOfExpertise', ''),
-        teams_exists=len(teams)>0,
+        teams_exists=len(teams) > 0,
         teams=teams
     )
 
@@ -274,6 +274,7 @@ def find_team_by_team_id():
         briefs=briefs
     )
 
+
 @main.route('/', methods=['GET'])
 @login_required
 @role_required('admin')
@@ -289,4 +290,3 @@ def find_brief_by_team_id():
         team_id=team_id,
         team=team
     )
-
