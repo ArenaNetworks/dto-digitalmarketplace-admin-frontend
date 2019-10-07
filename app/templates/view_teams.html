@@ -67,7 +67,11 @@ Buyers – Digital Marketplace admin
             {% call summary.row() %}
             {% for i in team.teamMembers %}
               {% for key, value in team.teamMembers[i].items() %}
-                {% if key != 'permissions' %}
+              {% if key == 'emailAddress' %}
+                {% call summary.field() %}
+                <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
+                {% endcall %}
+                {% elif key != 'permissions' %}
                   {{ summary.field_name(value) }}
                 {% else %}
                   {{ summary.field_name('False') }}
