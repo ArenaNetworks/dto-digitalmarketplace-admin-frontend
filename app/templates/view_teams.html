@@ -30,6 +30,67 @@ Buyers – Digital Marketplace admin
 </div>
 
 <div>
+  <h1>Merged Team leads and Team Members</h1>
+
+<div>
+    <h3> Team Leads</h3>
+    {% call(item) summary.list_table(
+            team.teamLeads,
+            field_headings=[                    
+            'Email Address',
+            'Name',
+            'Download Reports',
+            'Publish Opporunities',
+            'Create Drafts',
+            'Download Responses',
+            'Answer Seller Questions', 
+            'Create Work Orders'
+            ],
+            field_headings_visible=True)
+        %}
+            {% call summary.row() %}
+            {% for i in team.teamLeads %}
+              {% for key, value in team.teamLeads[i].items() %}
+                  {{ summary.field_name(value) }}
+                  <!-- {% call summary.field() %} -->  
+                  {% endcall %}
+              {% endfor %}
+              {% for i in range(6) %}
+                {{ summary.field_name(True) }}
+              {% endfor %}
+              {% endfor %}
+            {% endcall %}
+            {% call summary.row() %}
+            {% for i in team.teamMembers -%}
+              {% for key, value in team.teamMembers[i].items() -%}
+                {% if key != 'permissions' %}
+                  {{ summary.field_name(value) }}
+                {% else %}
+                    {% for permissionKey, permissionValue in value.items() -%}
+                    <td>{{ permissionValue  | replace(":"," ")}}</td>
+                  {% endfor -%}
+                  {% endif %}
+                  <!-- {% call summary.field() %} -->  
+                  {% endcall %}
+                {% endfor -%}
+              {% endfor -%}
+        {% endcall %}
+        {% endcall %}
+    </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div>
     <h3> Team Leads</h3>
     {% call(item) summary.list_table(
             team.teamLeads,
