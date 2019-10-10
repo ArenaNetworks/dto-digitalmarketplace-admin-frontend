@@ -29,6 +29,53 @@
     Team Email Address : {{team.emailAddress}}
   </div>
 
+
+  <br/> 
+  <div> 
+  <h3> testing </h3>
+  {{team.teamLeads}}
+  <br> 
+  {% call(item) summary.list_table(
+    team.teamLeads,
+    field_headings=[                    
+    'Email Address',
+    'Name',
+    'Team Lead',
+    'Download Reports',
+    'Publish Opporunities',
+    'Create Drafts',
+    'Download Responses',
+    'Answer Seller Questions', 
+    'Create Work Orders'
+    ],
+    field_headings_visible=True)
+%}
+
+  {% call summary.row() %}
+    {% for i in team.teamLeads %}
+      {% for key, value in team.teamLeads[i].items() %} 
+        {% if key == 'emailAddress' %}
+          {% call summary.field() %}
+            <a href="{{ url_for('.find_user_by_email_address', email_address = value)}}" method="get"  class="question">{{ value}}</a>    
+            {% endcall %}
+        {% else %}
+            {{ summary.field_name(value) }}
+            {% for i in range(7) %}
+              {{ summary.field_name(True) }}
+            {% endfor %}
+            {% call summary.row() %}
+            {% endcall %}
+          {% endif %}
+       {% endfor %}
+
+      {% endfor %}
+      {% endcall %}
+    {% endcall %}
+      
+</div>
+
+  <div>
+
   <div>
     <h3> Team Lead and Members' Permissions</h3>
     {% call(item) summary.list_table(
