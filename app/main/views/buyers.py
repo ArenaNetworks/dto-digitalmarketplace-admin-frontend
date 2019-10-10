@@ -268,11 +268,21 @@ def find_team_by_team_id():
     team = team_info.get('team')
     briefs = team_info.get('briefs')
 
+    count = 0
+    teamLeads = team.get('teamLeads')
+    #might have to return null 
+    for i in teamLeads:
+      for key, value in teamLeads[i].items():
+        if key == 'emailAddress':
+            count =+ 1
+    
+    print count
     return render_template_with_csrf(
         "view_teams.html",
         team_id=team_id,
         team=team,
-        briefs=briefs
+        briefs=briefs,
+        count = count
     )
 
 
@@ -286,6 +296,7 @@ def find_brief_by_team_id():
     team = team_info.get('team')
     briefs = team_info.get('briefs')
 
+    
     return render_template_with_csrf(
         "view_teams.html",
         team_id=team_id,
