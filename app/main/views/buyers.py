@@ -311,7 +311,8 @@ def find_team_by_team_id():
         team=team,
         briefs=briefs, 
         teamLeads_emailAddress = teamLeads_emailAddress,
-        teamLeads_name = teamLeads_name
+        teamLeads_name = teamLeads_name,
+        teamLeads_info = teamLeads_info
         # lengthTL = lengthTL,
         # team_leads=team_leads,
         # team_members=team_members, 
