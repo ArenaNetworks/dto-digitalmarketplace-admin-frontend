@@ -268,21 +268,50 @@ def find_team_by_team_id():
     team = team_info.get('team')
     briefs = team_info.get('briefs')
 
-    count = 0
     teamLeads = team.get('teamLeads')
-    #might have to return null 
+    teamLeads_emailAddress = []
+    teamLeads_name = []
+
     for i in teamLeads:
-      for key, value in teamLeads[i].items():
-        if key == 'emailAddress':
-            count =+ 1
+        for key, value in teamLeads[i].items():
+            if key == 'emailAddress':
+                teamLeads_emailAddress.append(value)
+            else:
+                teamLeads_name.append(value)
+
+    print teamLeads_emailAddress
+    print teamLeads_name 
+
+    # lengthTL = len(teamLeads)
+    #might have to return null 
+
+    # testing = testing.append(teamLeads)
     
-    print count
+    # team_leads = [{
+    #     'emailAddress': 'reshma.abraham+bteams@digital.gov.au',
+    #     'name': 'Reshma Abraham'
+    # }]
+
+
+    # team_members = [{
+    #     'emailAddress': 'reshma.abraham+bteams@digital.gov.au',
+    #     'name': 'Reshma Abraham'
+    # }]
+
+    #print team_leads
+
+    #print count
     return render_template_with_csrf(
         "view_teams.html",
         team_id=team_id,
         team=team,
-        briefs=briefs,
-        count = count
+        briefs=briefs, 
+        teamLeads_emailAddress = teamLeads_emailAddress,
+        teamLeads_name = teamLeads_name
+        # lengthTL = lengthTL,
+        # team_leads=team_leads,
+        # team_members=team_members, 
+        # testing = testing
     )
 
 
