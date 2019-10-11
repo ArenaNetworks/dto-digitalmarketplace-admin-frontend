@@ -271,9 +271,12 @@ def find_team_by_team_id():
     teamLeads = team.get('teamLeads')
     teamLeads_emailAddress = []
     teamLeads_name = []
+    teamLeads_info = []
 
     for i in teamLeads:
         for key, value in teamLeads[i].items():
+            teamLeads_info.append(key)
+            teamLeads_info.append(value)
             if key == 'emailAddress':
                 teamLeads_emailAddress.append(value)
             else:
@@ -281,6 +284,7 @@ def find_team_by_team_id():
 
     print teamLeads_emailAddress
     print teamLeads_name 
+    print teamLeads_info
 
     # lengthTL = len(teamLeads)
     #might have to return null 
