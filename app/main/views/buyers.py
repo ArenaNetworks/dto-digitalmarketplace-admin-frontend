@@ -262,9 +262,23 @@ def seller_feedback_email(brief_id):
 @login_required
 @role_required('admin')
 def find_team_by_team_id():
+
+    try: 
     team_id = request.args.get('team_id')
 
+    except:
+        return render_template_with_csrf(
+            "view_all_teams.html",
+            team_id=team_id,
+            team=team,
+            briefs=briefs,
+            team_leads=team_leads_email_name,
+            team_members=team_members_email_name
+    )
+        )
+
     team_info = data_api_client.req.admin().team(team_id).get()
+
     team = team_info.get('team')
     briefs = team_info.get('briefs')
 

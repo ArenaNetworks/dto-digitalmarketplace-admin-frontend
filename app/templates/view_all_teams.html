@@ -1,0 +1,56 @@
+{% import "toolkit/summary-table.html" as summary %}
+
+{% extends "_base_page.html" %}
+
+{% block page_title %}
+  Buyers – Digital Marketplace admin
+{% endblock %}
+
+{% block breadcrumb %}
+{%
+      with items = [
+          {
+              "link": url_for('.index'),
+              "label": "Admin home"
+          },
+      ]
+  %}
+    {% include "_breadcrumb.html" %}
+  {% endwith %}
+{% endblock %}
+
+{% block main_content %}
+<div>
+  <h3>Viewing all teams </h3>
+  Team ID: {{team_id}}
+  <br/>
+  Team Name: {{team.name}}
+  <br/> 
+  Team Email Address : {{team.emailAddress}}
+</div>
+
+
+<!-- create a table with 
+team ID, Team Name  Team organisation, --> 
+
+
+<div> 
+    <br> 
+    <h3> All teams Table</h3>
+    {% call(item) summary.list_table(
+      team_leads,
+      field_headings=[
+        'ID',                    
+        'Name',
+        'organisation'
+
+      ],
+      field_headings_visible=True)
+  %}
+    {% call summary.row() %}
+      {{ summary.text(item.name) }}
+      {% call summary.field() %}
+        <a href="{{ url_for('.find_user_by_email_address', email_address = item.emailAddress)}}" class="question">{{ item.emailAddress}}</a>    
+      {% endcall %}
+    {% endcall %}
+  {% endcall %}
