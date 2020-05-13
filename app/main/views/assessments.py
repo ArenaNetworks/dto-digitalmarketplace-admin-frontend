@@ -10,7 +10,7 @@ from react.render import render_component
 
 @main.route('/assessments', methods=['GET'])
 @login_required
-@role_required('admin')
+@role_required('admin', 'assessor')
 def assessments_review():
     SCHEME = request.environ['wsgi.url_scheme']
     assessments = data_api_client.req.assessments().get()['assessments']
