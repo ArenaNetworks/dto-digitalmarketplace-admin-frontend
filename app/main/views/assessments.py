@@ -32,7 +32,7 @@ def assessments_review():
 
 @main.route('/assessments/approve', methods=['POST'])
 @login_required
-@role_required('admin')
+@role_required('admin', 'assessor')
 def assessments_approve():
     id = request.get_json(force=True)['id']
     assessment = data_api_client.req.assessments(id).get()
@@ -44,7 +44,7 @@ def assessments_approve():
 
 @main.route('/assessments/reject', methods=['POST'])
 @login_required
-@role_required('admin')
+@role_required('admin', 'assessor')
 def assessments_reject():
     json_payload = request.get_json(force=True)
     application_id = json_payload.get('application_id')
@@ -61,7 +61,7 @@ def assessments_reject():
 @main.route('/assessments/supplier', methods=['GET'])
 @main.route('/assessments/supplier/<int:id>', methods=['GET'])
 @login_required
-@role_required('admin')
+@role_required('admin', 'assessor')
 def assessments_supplier(id=None):
     application = {'application': data_api_client.get_supplier(id)['supplier']}
 
