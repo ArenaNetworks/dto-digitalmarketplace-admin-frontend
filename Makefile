@@ -37,4 +37,9 @@ show_environment:
 	@echo "Environment variables in use:"
 	@env | grep DM_ || true
 
+docker:
+	docker build -t dto-admin-frontend .
+docker-run:
+	docker run -it --rm -p 8000:8000 -t dto-admin-frontend
+
 .PHONY: run_all run_app virtualenv requirements requirements_for_test frontend_build test test_pep8 test_python show_environment

@@ -22,7 +22,7 @@ class Config(object):
     CSRF_ENABLED = True
     CSRF_TIME_LIMIT = 8*3600
 
-    DM_MAIN_SERVER_NAME = 'localhost:8000'
+    DM_MAIN_SERVER_NAME = 'host.docker.internal:8000'
 
     DM_S3_DOCUMENT_BUCKET = None
     DM_DOCUMENTS_URL = 'https://assets.dev.digitalmarketplace.service.gov.uk'
@@ -73,9 +73,16 @@ class Config(object):
     ROLLBAR_TOKEN = None
     S3_BUCKET_NAME = None
 
+    try:
+        print("REDIS_SERVER_HOST:", os.environ['REDIS_SERVER_HOST'])
+        REDIS_HOST = os.environ['REDIS_SERVER_HOST']
+    except KeyError:
+        print("Environment variable 'REDIS_SERVER_HOST' does not exist using value: host.docker.internal")
+        REDIS_HOST = "host.docker.internal"
+
     # redis
     REDIS_SESSIONS = True
-    REDIS_SERVER_HOST = '127.0.0.1'
+    REDIS_SERVER_HOST = REDIS_HOST
     REDIS_SERVER_PORT = 6379
     REDIS_SERVER_PASSWORD = None
     REDIS_SSL = False
@@ -93,7 +100,7 @@ class Test(Config):
 
     DM_TIMEZONE = 'Australia/Sydney'
 
-    DM_MAIN_SERVER_NAME = 'localhost'
+    DM_MAIN_SERVER_NAME = 'host.docker.internal'
 
     DM_DATA_API_URL = "http://baseurl"
     DM_LOG_LEVEL = 'CRITICAL'
@@ -117,7 +124,7 @@ class Development(Config):
     DM_COMMUNICATIONS_BUCKET = 'digitalmarketplace-communications-dev-dev'
     DM_AGREEMENTS_BUCKET = 'digitalmarketplace-documents-dev-dev'
 
-    DM_DATA_API_URL = "http://localhost:5000/api/"
+    DM_DATA_API_URL = "http://host.docker.internal:5000/api/"
     DM_DATA_API_AUTH_TOKEN = "myToken"
     SECRET_KEY = 'DevKeyDevKeyDevKeyDevKeyDevKeyDevKeyDevKeyX='
     DM_S3_DOCUMENT_BUCKET = "digitalmarketplace-documents-dev-dev"
@@ -131,7 +138,7 @@ class Development(Config):
 
     REACT_RENDER = True
     DM_SEND_EMAIL_TO_STDERR = True
-
+    REDIS_SERVER_HOST = "host.docker.internal"
 
 class Live(Config):
     DEBUG = False
